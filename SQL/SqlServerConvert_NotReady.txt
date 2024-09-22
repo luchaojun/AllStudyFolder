@@ -1,0 +1,54 @@
+在SQL Server中，CONVERT函数的style参数主要用于在将日期和时间数据转换为字符串时指定输出格式。这个参数对于确保日期和时间值以特定格式显示非常有用。
+
+### 使用场景
+
+1. **将日期/时间转换为字符串**：当需要将日期或时间类型的数据转换为字符串类型，并希望控制其显示格式时。
+2. **格式化日期/时间输出**：可以用于报表、日志记录等需要特定日期/时间格式的场景。
+
+### 常见样式代码
+
+以下是一些常用的style参数及其对应的日期/时间格式：
+
+- `1`: `mm/dd/yy` - 月/日/年（两位数的年份）
+- `3`: `dd/mm/yy` - 日/月/年（两位数的年份）
+- `4`: `dd.mm.yy` - 日.月.年（两位数的年份）
+- `10`: `mm-dd-yy` - 月-日-年（两位数的年份）
+- `20`: `yyyy-mm-dd hh:mi:ss` - 年-月-日 时:分:秒
+- `21`: `yyyy-mm-dd hh:mi:ss.mmm` - 年-月-日 时:分:秒.毫秒
+- `23`: `yyyy-mm-dd` - 年-月-日
+- `100`: `Mon dd yyyy hh:miAM` - 星期几 日 年 时:分AM/PM
+- `101`: `mm/dd/yyyy` - 月/日/年
+- `102`: `yyyy.mm.dd` - 年.月.日
+- `103`: `dd/mm/yyyy` - 日/月/年
+- `104`: `dd.mm.yyyy` - 日.月.年
+- `105`: `dd-mm-yyyy` - 日-月-年
+- `106`: `dd mon yyyy` - 日 月份 年
+- `107`: `Mon dd, yyyy` - 星期几 日 , 年
+- `108`: `hh:mm:ss` - 时:分:秒
+- `112`: `yyyymmdd` - 年月日（无分隔符）
+
+### 示例
+
+假设有一个表`Orders`，其中包含一个列`OrderDate`为`DATETIME`类型，我们可以使用CONVERT函数将其格式化为不同的字符串表示形式。
+
+```sql
+-- 将日期转换为 'yyyy-mm-dd' 格式的字符串
+SELECT OrderID, CONVERT(VARCHAR(10), OrderDate, 23) AS FormattedOrderDate
+FROM Orders;
+
+-- 将日期转换为 'mm/dd/yyyy' 格式的字符串
+SELECT OrderID, CONVERT(VARCHAR(10), OrderDate, 101) AS FormattedOrderDate
+FROM Orders;
+
+-- 将日期和时间转换为 'yyyy-mm-dd hh:mi:ss' 格式的字符串
+SELECT OrderID, CONVERT(VARCHAR(19), OrderDate, 20) AS FormattedOrderDateTime
+FROM Orders;
+```
+
+### 注意事项
+
+- 在使用style参数时，必须确保目标数据类型是字符串类型（如VARCHAR或CHAR）。
+- 如果未提供style参数，则默认情况下，日期和时间数据将按照SQL Server的默认区域设置进行格式化。
+- 某些style代码仅适用于特定的数据类型转换，例如将日期/时间类型转换为字符串类型。
+
+通过合理使用style参数，可以确保日期和时间数据的显示格式符合业务需求。
