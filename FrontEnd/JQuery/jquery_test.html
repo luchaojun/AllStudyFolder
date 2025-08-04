@@ -1,0 +1,33 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".btn_click").click(function(){
+		$.ajax({
+		url: 'http://localhost:80/process.php',       // PHP 文件路径
+		type: 'POST',             // 请求方法 (GET 或 POST)
+		data: {                   // 发送到服务器的数据
+			name: 'John',
+			age: 30
+		},
+		dataType: 'json',         // 预期服务器返回的数据类型
+		success: function(response) {
+			// 请求成功时的处理
+			console.log('服务器响应:', response);
+		},
+		error: function(xhr, status, error) {
+			// 请求失败时的处理
+			console.error('请求出错:', error);
+		}
+	});
+  });
+});
+</script>
+</head>
+
+<body>
+<button class="btn_click">發送請求給服務器文件</button>
+</body>
+
+</html> 

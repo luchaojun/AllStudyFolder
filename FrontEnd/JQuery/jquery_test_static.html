@@ -1,0 +1,24 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	 $('#city').change(function() {
+		var a = $("#city").options;
+		console.log("a="+a);
+		console.log(a.selectedIndex);
+		console.log(a[a.selectedIndex].innerHTML);
+	  });
+});
+</script>
+</head>
+
+<body>
+	 <select id="city" name="city">
+		<option value="1">上海</option>
+		<option value="2">北京</option>
+		<option value="3">深圳</option>
+	</select>
+</body>
+
+</html> 
